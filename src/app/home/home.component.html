@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 height">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">
+              <i (click)="sortBy('name')" class="fa-solid fa-sort"></i
+              >&nbsp;Name
+            </th>
+            <th scope="col">
+              <i (click)="sortBy('phone')" class="fa-solid fa-sort"></i
+              >&nbsp;Phone
+            </th>
+            <th scope="col">
+              <i (click)="sortBy('email')" class="fa-solid fa-sort"></i
+              >&nbsp;Email
+            </th>
+            <th scope="col">
+              <i (click)="sortBy('country')" class="fa-solid fa-sort"></i
+              >&nbsp;Country
+            </th>
+            <th scope="col">
+              <i (click)="sortBy('age')" class="fa-solid fa-sort"></i>&nbsp;Age
+            </th>
+            <th scope="col">
+              <i (click)="sortBy('color')" class="fa-solid fa-sort"></i
+              >&nbsp;Color
+            </th>
+            <th scope="col">
+              <i (click)="sortBy('postalZip')" class="fa-solid fa-sort"></i
+              >&nbsp;Postal
+            </th>
+            <th scope="col">
+              <i (click)="sortBy('latlng')" class="fa-solid fa-sort"></i
+              >&nbsp;Coordinate
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            [ngStyle]="{ color: user.color }"
+            *ngFor="let user of userInfo | search: incomingFilterWord"
+          >
+            <th>{{ user.name }}</th>
+            <td>{{ user.phone }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.country }}</td>
+            <td>{{ user.age }}</td>
+            <td>{{ user.color }}</td>
+            <td>{{ user.postalZip }}</td>
+            <td>{{ user.latlng }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div
+      *ngIf="!incomingFilterWord"
+      id="pagination"
+      class="input-group d-flex justify-content-center mb-5"
+    >
+      <a *ngIf="currentPage != 0" (click)="pageDown()"
+        >{{ currentPage }}&nbsp; &nbsp;<i
+          class="fa-solid fa-arrow-left-long"
+        ></i
+      ></a>
+
+      &nbsp; &nbsp;
+      <span>{{ currentPage + 1 }} of {{ totalPage }}</span> &nbsp; &nbsp;
+      <a *ngIf="currentPage < totalPage - 1" (click)="pageUp()"
+        ><i class="fa-solid fa-arrow-right-long"></i>&nbsp; &nbsp;{{
+          currentPage + 2
+        }}</a
+      >
+    </div>
+  </div>
+</div>
