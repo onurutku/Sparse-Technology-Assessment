@@ -8,10 +8,20 @@ import { HeaderComponent } from './header/header.component';
 import { SearchPipe } from './search.pipe';
 import { CardsComponent } from './cards/cards.component';
 import { HomeComponent } from './home/home.component';
+import { AppRoutingModule } from './app-routing.module';
+import { RouterModule } from '@angular/router';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, SearchPipe, CardsComponent, HomeComponent],
-  imports: [BrowserModule, FormsModule],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    SearchPipe,
+    CardsComponent,
+    HomeComponent,
+    UsersComponent,
+  ],
+  imports: [BrowserModule, FormsModule, AppRoutingModule, RouterModule],
   providers: [DataService],
   bootstrap: [AppComponent],
 })

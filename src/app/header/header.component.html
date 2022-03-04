@@ -4,7 +4,7 @@
       class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
     >
       <a
-        href="/"
+        [routerLink]="'/home'"
         class="d-flex align-items-center text-dark text-decoration-none me-4"
       >
         <!-- <i class="fa-solid fa-bars"></i> -->
@@ -13,10 +13,39 @@
       <ul
         class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
       >
-        <li><a class="nav-link px-2 link-secondary">Home</a></li>
-        <li><a class="nav-link px-2 link-secondary">Users</a></li>
-        <li><a class="nav-link px-2 link-secondary">Cards</a></li>
-        <li><a class="nav-link px-2 link-secondary">Map</a></li>
+        <li>
+          <a
+            [routerLink]="'/home'"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="nav-link px-2 link-secondary"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="'/users'"
+            routerLinkActive="active"
+            class="nav-link px-2 link-secondary"
+            >Users</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="'/cards'"
+            routerLinkActive="active"
+            class="nav-link px-2 link-secondary"
+            >Cards</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="'/map'"
+            routerLinkActive="active"
+            class="nav-link px-2 link-secondary"
+            >Map</a
+          >
+        </li>
       </ul>
 
       <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">

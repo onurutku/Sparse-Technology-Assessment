@@ -1,3 +1,8 @@
-.main {
-  position: relative;
+.body {
+  margin-top: 120px;
+}
+@media screen and (max-width: 992px) {
+  .body {
+    margin-top: 220px;
+  }
 }
