@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { UsersComponent } from './users/users.component';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { UsersComponent } from './users/users.component';
     CardsComponent,
     HomeComponent,
     UsersComponent,
+    MapComponent,
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule, RouterModule],
   providers: [DataService],

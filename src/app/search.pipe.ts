@@ -12,12 +12,12 @@ export class SearchPipe implements PipeTransform {
     for (let item of value) {
       if (
         item.name.toUpperCase().includes(filterWord.toUpperCase()) ||
-        item.phone.includes(filterWord) ||
+        // item.phone.includes(filterWord) ||
         item.email.toUpperCase().includes(filterWord.toUpperCase()) ||
         item.country.toUpperCase().includes(filterWord.toUpperCase()) ||
-        item.age.toString().includes(filterWord) ||
-        item.color.toUpperCase().includes(filterWord.toUpperCase()) ||
-        item.postalZip.toUpperCase().includes(filterWord.toUpperCase())
+        item.age.toString().includes(filterWord)
+        // item.color.toUpperCase().includes(filterWord.toUpperCase()) ||
+        // item.postalZip.toUpperCase().includes(filterWord.toUpperCase())
       ) {
         resultArray.push(item);
       }

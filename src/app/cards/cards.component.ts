@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { DataService } from '../data.service';
 import { user } from '../dataModel';
 
@@ -9,31 +10,44 @@ interface users extends Array<user> {}
   templateUrl: './cards.component.html',
   styleUrls: ['./cards.component.scss'],
 })
-export class CardsComponent implements OnInit {
-  usersData = <users>[];
-  pagination = <users>[];
+export class CardsComponent implements OnInit, OnDestroy {
+  userInfo = <users>[];
+  hamData = <users>[];
   totalPage: number;
   currentPage: number = 0;
+  incomingFilterWord: string;
+  subs: Subscription;
 
   constructor(private data: DataService) {}
 
   ngOnInit(): void {
-    this.pagination = this.data.getAllData();
-    console.log(this.pagination);
-    this.totalPage = Math.ceil(this.data.userInformation.length / 6);
+    this.hamData = this.data.getAllData();
+    this.totalPage = Math.ceil(this.hamData.length / 6);
     for (let i = this.currentPage * 6; i < 6 * (this.currentPage + 1); i++) {
-      if (i < this.pagination.length) {
-        this.usersData.push(this.pagination[i]);
+      if (i < this.hamData.length) {
+        this.userInfo.push(this.hamData[i]);
       } else {
         return;
       }
     }
+    this.subs = this.data.filter.subscribe((data) => {
+      this.incomingFilterWord = data;
+      if (this.incomingFilterWord == '') {
+        this.initData();
+      } else {
+        this.userInfo = [];
+        this.userInfo = this.data.getAllData();
+      }
+    });
+  }
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
   initData() {
-    this.usersData = [];
+    this.userInfo = [];
     for (let i = this.currentPage * 6; i < 6 * (this.currentPage + 1); i++) {
-      if (i < this.pagination.length) {
-        this.usersData.push(this.pagination[i]);
+      if (i < this.hamData.length) {
+        this.userInfo.push(this.hamData[i]);
       } else {
         return;
       }

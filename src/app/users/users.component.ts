@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { DataService } from '../data.service';
 import { user } from '../dataModel';
 interface users extends Array<user> {}
@@ -7,18 +8,20 @@ interface users extends Array<user> {}
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, OnDestroy {
   userInfo = <users>[];
   hamData = <users>[];
   sortCounter: boolean = false;
   totalPage: number;
   currentPage: number = 0;
-  incomingFilterWord: string;
+  incomingFilterWord: string = '';
+  subs: Subscription;
 
   constructor(private data: DataService) {}
   ngOnInit(): void {
     this.hamData = this.data.getAllData();
     this.totalPage = Math.ceil(this.hamData.length / 10);
+
     for (let i = this.currentPage * 10; i < 10 * (this.currentPage + 1); i++) {
       if (i < this.hamData.length) {
         this.userInfo.push(this.hamData[i]);
@@ -26,9 +29,18 @@ export class UsersComponent implements OnInit {
         return;
       }
     }
-    this.data.filter.subscribe((data) => {
+    this.subs = this.data.filter.subscribe((data) => {
       this.incomingFilterWord = data;
+      if (this.incomingFilterWord == '') {
+        this.initData();
+      } else {
+        this.userInfo = [];
+        this.userInfo = this.data.getAllData();
+      }
     });
+  }
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
   initData() {
     this.userInfo = [];

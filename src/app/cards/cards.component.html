@@ -1,6 +1,9 @@
 <div class="container">
   <div class="row">
-    <div *ngFor="let user of usersData" class="col-md-4 mb-3 mb-3">
+    <div
+      *ngFor="let user of userInfo | search: incomingFilterWord"
+      class="col-md-4 mb-3 mb-3"
+    >
       <div class="card d-flex justify-content-center align-items-center">
         <img src="../../assets/img/pp.jpeg" class="card-img-top" alt="..." />
         <div class="card-body text-center">
@@ -13,7 +16,10 @@
       </div>
     </div>
   </div>
-  <div class="input-group d-flex justify-content-center mb-5">
+  <div
+    *ngIf="!incomingFilterWord"
+    class="input-group d-flex justify-content-center mb-5"
+  >
     <a *ngIf="currentPage != 0" (click)="pageDown()"
       >{{ currentPage }}&nbsp; &nbsp;<i class="fa-solid fa-arrow-left-long"></i
     ></a>
