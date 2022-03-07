@@ -1,1 +1,20 @@
-
+.section-map,
+.section-users,
+.section-cards {
+  height: 93vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.section-map {
+  background: linear-gradient(to bottom right, #dcf5a4, #b2fcbc);
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+}
+.section-users {
+  background: linear-gradient(to right, #8360c3, #2ebf91);
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+}
+.section-cards {
+  background-image: linear-gradient(to right, #00b4db, #0083b0);
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+}
