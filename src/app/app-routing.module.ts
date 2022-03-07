@@ -1,40 +1,41 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { CardsComponent } from './cards/cards.component';
-import { UsersComponent } from './users/users.component';
-import { MapComponent } from './map/map.component';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '/map',
     pathMatch: 'full',
   },
-  {
-    path: 'home',
-    component: HomeComponent,
-  },
+  // {
+  //   path: 'home',
+  //   loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
+  // },
   {
     path: 'users',
-    component: UsersComponent,
+    loadChildren: () =>
+      import('./users/users.module').then((m) => m.UsersModule),
   },
   {
     path: 'cards',
-    component: CardsComponent,
+    loadChildren: () =>
+      import('./cards/cards.module').then((m) => m.CardsModule),
   },
   {
     path: 'map',
-    component: MapComponent,
+    loadChildren: () => import('./map/map.module').then((m) => m.MapModule),
   },
   {
     path: '**',
-    redirectTo: '/home',
+    redirectTo: '/map',
   },
 ];
 @NgModule({
   declarations: [],
-  imports: [CommonModule, RouterModule.forRoot(appRoutes)],
+  imports: [
+    CommonModule,
+    RouterModule.forRoot(appRoutes, { preloadingStrategy: PreloadAllModules }),
+  ],
 })
 export class AppRoutingModule {}
